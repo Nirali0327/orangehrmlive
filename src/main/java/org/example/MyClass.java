@@ -2,8 +2,10 @@ package org.example;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -27,9 +29,28 @@ public class MyClass {
 
         //login button
        // driver.findElement(By.xpath("//input[@id = \"btnLogin\"]")).click();
-        clickButton((By.xpath("//input[@id = \"btnLogin\"]")));
+        clickButton((By.xpath("//input[@id = \"btnLogin\"]"))); //login button
 
         driverUrlToBe("https://opensource-demo.orangehrmlive.com/index.php/dashboard",20); // callingexplicit waits
+// ----------------------- Test for Admin tab << System user>> ---------------------//
+        // click on a Admin tab on a header bar
+        //driver.findElement(By.xpath("//b[.='Admin']")).click();
+        clickButton(By.xpath("//b[.='Admin']"));
+        // System users -- enter username
+        sendKeys(By.name("searchSystemUser[userName]"),"Fiona.Grace");
+        //  select user Role
+        WebElement element1 = driver.findElement(By.id("searchSystemUser_userType"));
+        Select dropdown1 = new Select(element1);
+        dropdown1.selectByVisibleText("ESS");
+        // enter employee name
+        sendKeys(By.className("ac_input"),"Fiona.Grace");
+        // select status
+        WebElement element2 = driver.findElement(By.id("searchSystemUser_status"));
+        Select dropdown2 = new Select(element2);
+        dropdown2.selectByVisibleText("Enabled");
+        // click search button
+        clickButton(By.className("searchbutton"));
+
 
        // driver.quit();
 
